@@ -6,7 +6,7 @@ import json
 pwm_info_filepath = './pwm_info.json'
 PWM_LED_PIN = 13
 PWM_FREQ = 2500
-UV_PIN = 40
+UV_PIN = 21
 
 GPIO.setmode(GPIO)
 GPIO.setup(UV_PIN, GPIO.OUT)
