@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import json
 
-broker_ip = '20.191.97.53'
+broker_ip = '172.20.10.2'
 
 f = open('./pwm_info.json', 'r')
 mamual_state = json.load(f)
@@ -9,8 +9,8 @@ f.close()
 
 def on_connect(client, userdata, flags, rc):
     print('Connect with the result code ' + str(rc))
-    client.subscribe('farm3/led/node1')
-    client.subscribe('farm3/uv/node1')
+    client.subscribe('farm4/zero/led')
+    client.subscribe('farm4/zero/uv')
     client.subscribe('farm3/ai_signal_zero/node1')
 
 def on_message(client, userdata, msg):
@@ -20,12 +20,12 @@ def on_message(client, userdata, msg):
         f = open('./pwm_info.json', 'w')
         json.dump(eval(content), f)
         f.close()
-    if topic == 'farm3/led/node1':
+    if topic == 'farm4/zero/led':
         f = open('./pwm_info.json', 'w')
         mamual_state['led'] = content
         json.dump(mamual_state, f)
         f.close()
-    if topic == 'farm3/uv/node1':
+    if topic == 'farm4/zero/uv':
         f = open('./pwm_info.json', 'w')
         mamual_state['uv'] = content
         json.dump(mamual_state, f)
