@@ -10,7 +10,7 @@ UV_PIN = 21
 IR_PIN = 20
 #  pin20(ir) pin21(uv)
 #            gnd
-GPIO.setmode(GPIO)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(UV_PIN, GPIO.OUT)
 GPIO.setup(IR_PIN, GPIO.OUT)
 pi = pigpio.pi()
@@ -30,7 +30,7 @@ def uv_output(uv_state):
 
 
 def ir_output(ir_state):
-    if ir_state == "1" and ir_state == "true":
+    if ir_state == "1" or ir_state == "true":
         GPIO.output(IR_PIN, GPIO.HIGH)
         return 'ir is up'
     else:
