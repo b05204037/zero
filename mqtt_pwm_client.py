@@ -9,11 +9,13 @@ f = open('./pwm_info.json', 'r')
 state = json.load(f)
 f.close()
 
+
 def on_connect(client, userdata, flags, rc):
     print('Connect with the result code ' + str(rc))
     client.subscribe(farm_num + '/zero/led')
     client.subscribe(farm_num + '/zero/uv')
     client.subscribe(farm_num + '/zero/ir')
+
 
 def on_message(client, userdata, msg):
     topic = msg.topic
@@ -33,8 +35,9 @@ def on_message(client, userdata, msg):
         state['uv'] = content
         json.dump(state, f)
         f.close()
-    
+
     print('topic : ' + topic + ' msg : ' + content)
+
 
 client = mqtt.Client('zero_01')
 client.on_connect = on_connect
